@@ -1,38 +1,40 @@
-name: Deploy BoomPass to GitHub Pages
+name: Deploy BoomPass to Vercel
 
 on:
   push:
     branches:
+      - main  # Change this if your main branch has a different name
+
+  pull_request:
+    branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: 🚀 Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set Up Node.js
-        uses: actions/setup-node@v3
+      - name: 📦 Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 18 # Ensure this matches your project requirements
+          cache: 'npm'
 
-      - name: Install Dependencies
+      - name: 📂 Install dependencies
         run: npm install
+        working-directory: BoomPass  # Adjust this if your project is in a subdirectory
 
-      - name: Inject Thirdweb Credentials
-        run: |
-          echo "NEXT_PUBLIC_THIRDWEB_CLIENT_ID=${{ secrets.THIRDWEB_CLIENT_ID }}" >> .env.local
-
-      - name: Build Project
+      - name: 🔨 Build project
         run: npm run build
+        working-directory: BoomPass  # Adjust this if needed
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: 🚀 Deploy to Vercel
+        uses: amondnet/vercel-action@v25
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}  # Store in GitHub Secrets
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}  # Store in GitHub Secrets
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}  # Store in GitHub Secrets
+          working-directory: BoomPass  # Adjust this if your project is in a subdirectory
