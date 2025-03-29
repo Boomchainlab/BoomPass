@@ -1,0 +1,28 @@
+{
+  "name": "boompasse",
+  "version": "1.0.0",
+  "description": "BoomPass - Decentralized Web3 authentication and access control system.",
+  "author": "Boomchainlab",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next export"
+  },
+  "dependencies": {
+    "@thirdweb-dev/react": "^4.0.0",
+    "@thirdweb-dev/sdk": "^4.0.0",
+    "@vercel/analytics": "^1.2.0",
+    "next": "13.4.12",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.1.0",
+    "typescript": "^5.3.3"
+  }
+}
